@@ -9,11 +9,11 @@ local library = {
 	subs = {},
 	colored = {},
 	configuration = {
-		hideKeybind = Enum.KeyCode.RightShift, -- shared.force_toggle_gui_keybind kaldırıldı
+		hideKeybind = Enum.KeyCode.RightShift,
 		smoothDragging = false,
 		easingStyle = Enum.EasingStyle.Quart,
 		easingDirection = Enum.EasingDirection.Out,
-		hideOnStartup = false -- Yeni eklendi: GUI başlangıçta gizli olmasın
+		hideOnStartup = false
 	},
 	colors = {
 		main = Color3.fromRGB(255, 39, 39),
@@ -39,45 +39,26 @@ local library = {
 		local player = game:GetService("Players").LocalPlayer
 		local playerGui = player:WaitForChild("PlayerGui")
 
-		local existing = playerGui:FindFirstChild("PepsiLib") -- "Main" yerine "PepsiLib" yapıldı
+		local existing = playerGui:FindFirstChild("PepsiLib")
 		if existing then
 			return existing
 		else
 			local newGui = Instance.new("ScreenGui")
-			newGui.Name = "PepsiLib" -- "Main" yerine "PepsiLib" yapıldı
+			newGui.Name = "PepsiLib"
 			newGui.IgnoreGuiInset = true
 			newGui.ResetOnSpawn = false
 			newGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 			newGui.Parent = playerGui
 			return newGui
 		end
-	end)()
-}
-
--- GUI toggle fonksiyonu
-local function toggleUI()
-	if library.gui_parent then
-		library.gui_parent.Enabled = not library.gui_parent.Enabled
-	end
-end
-
--- Tuş dinleyici
-game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
-	if not gameProcessed and input.KeyCode == library.configuration.hideKeybind then
-		toggleUI()
-	end
-end)
-
--- GUI başlangıçta görünür olsun
-if library.gui_parent then
-	library.gui_parent.Enabled = true
-end
+	end)(),
 	colorpicker = false,
 	colorpickerconflicts = {},
 	rainbowflags = {},
 	rainbows = 0,
 	rainbowsg = 0
 }
+
 library.Subs = library.subs
 local library_flags = library.flags
 library.Flags = library_flags
